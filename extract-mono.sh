@@ -1,5 +1,8 @@
 #!/bin/bash
 
+workdir=working_dir
+outdir=output
+
 dir="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 source ${dir}/common.sh
 
@@ -13,9 +16,6 @@ echo "xml: $xml"
 
 lang=$(expr $xml : '.*ted_\(.*\)-')
 echo "lang: $lang"
-
-workdir=working_dir
-outdir=output
 
 show_exec mkdir -p ${workdir}
 show_exec mkdir -p ${outdir}

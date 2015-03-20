@@ -15,19 +15,17 @@ punctList.append('。')
 punctList.append('！')
 punctList.append('？')
 
-def readLines(inputFiles):
-    lines = []
-    for inputFile in inputFiles:
-        lines.append( inputFile.readline() )
-    return lines
-
 def writeLines(outputFiles, lines, newLine = False):
     for i, outputFile in enumerate(outputFiles):
-        outputFile.write( lines[i] )
+        line = lines[i]
+        shouldWrite = bool(line) and (line not in punctList)
+        if shouldWrite:
+            outputFile.write( line )
         if newLine:
             outputFile.write("\n")
         else:
-            outputFile.write(" ")
+            if shouldWrite:
+                outputFile.write(" ")
 
 def main():
     parser = argparse.ArgumentParser(description="re-build sentences by strong punctuation")
@@ -40,10 +38,8 @@ def main():
     outputFiles = []
     for path in args.inputPathList:
         outputFiles.append( open(path+args.suffix, 'w') )
-    while True:
-        lines = readLines(inputFiles)
-        if not any(lines):
-            break
+    for lines in zip(*inputFiles):
+        lines = list(lines)
         for i, line in enumerate(lines):
             lines[i] = line.strip()
         for punct in punctList:

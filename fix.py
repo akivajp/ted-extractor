@@ -5,11 +5,17 @@ import sys
 import re
 
 replaceList = []
+replaceList.append(['\s+', ' '])
 replaceList.append(['（', '('])
 replaceList.append(['）', ')'])
 replaceList.append(['　', ' '])
+replaceList.append(['^(\([^\)]*\).\s*)+', ''])
+replaceList.append(['.\s*(\([^\)]*\).\s*)+', '.'])
 replaceList.append(['\([^\)]*\)', ''])
 replaceList.append(['<[^>]*>', ''])
+replaceList.append(['&amp;', '&'])
+replaceList.append(['&gt;', '>'])
+replaceList.append(['&lt;', '<'])
 
 suffixList = []
 suffixList.append('ありがとう')
