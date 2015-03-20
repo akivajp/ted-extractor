@@ -6,15 +6,12 @@ source ${dir}/config.sh
 
 show_exec()
 {
-#  echo "[exec ${stamp} on ${HOST}] $*" | tee -a ${LOG}
   echo "[exec ${stamp} on ${HOST}] $@" | tee -a ${LOG}
-#  eval $*
   eval "$@"
 
   if [ $? -gt 0 ]
   then
     local red=31
-#    local msg="[error ${stamp} on ${HOST}]: $*"
     local msg="[error ${stamp} on ${HOST}]: $@"
     echo -e "\033[${red}m${msg}\033[m" | tee -a ${LOG}
     exit 1

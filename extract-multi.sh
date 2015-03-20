@@ -112,7 +112,7 @@ LC_ALL=C show_exec sort -t "$'\t'" -k 1 ${joined} \> ${joined_sorted}
 for (( i = 0; i < ${#langs[@]}; i++ )); do
   lang=${langs[$i]}
   outfile=${workdir}/ted_${tuple}.${lang}.sent
-  let f=${i}+1
+  let f=${i}+2
   show_exec cut -d "$'\t'" -f ${f} ${joined_sorted} \> ${outfile}
 done
 
